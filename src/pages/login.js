@@ -1,5 +1,5 @@
 import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
-import { Header } from './header';
+import { Header } from '../components/header';
 
 export function Login() {
   return (

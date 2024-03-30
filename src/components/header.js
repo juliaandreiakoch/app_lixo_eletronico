@@ -4,7 +4,7 @@ export function Header() {
   return (
     <View style={styles.header}>
       <Image 
-        source={require('../../assets/logoIcon.png')}
+        source={require('../assets/logoIcon.png')}
         style={styles.image}
       />
       <Text style={styles.appName}>DescarTech</Text>
