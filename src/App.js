@@ -1,8 +1,8 @@
-import { Login } from './components/login';
+import { UserRoutes } from './routes/userRoutes'
 
 export default function App() {
   return (
-    <Login/>
+    <UserRoutes/>
   );
 }
 

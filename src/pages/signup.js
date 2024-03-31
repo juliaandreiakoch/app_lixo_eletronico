@@ -1,15 +1,33 @@
+import React, { useState } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Header } from '../components/header';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export function Login({ navigation }) {
+import CheckBox from 'react-native-check-box';
+
+export function Signup({ navigation }) {
+  const [isONGChecked, setIsONGChecked] = React.useState(false);
+  const [isWasteDisposalChecked, setIsWasteDisposalChecked] = React.useState(false);
+
+  const handleONGCheck = () => {
+    setIsONGChecked(!isONGChecked);
+    if(isWasteDisposalChecked) {
+      setIsWasteDisposalChecked(false);
+    }
+  }
+
+  const handleWasteDisposalCheck = () => {
+    setIsWasteDisposalChecked(!isWasteDisposalChecked);
+    if(isONGChecked) {
+      setIsONGChecked(false);
+    }
+  }
+
   return (
     <KeyboardAvoidingView style={styles.background}>
       <Header/>
       <View style={styles.loginContainer}>
-        <Text style={styles.title}>Login</Text>
-        <Text style={styles.subtitle}>Sign in to continue.</Text>
+        <Text style={styles.title}>Create new Account</Text>
+        <Text style={styles.subtitle}>Already Registered? Log in here.</Text>
         <Text style={styles.credentials}>NAME</Text>
         <TextInput 
           placeholder='Name'
@@ -17,19 +35,36 @@ export function Login({ navigation }) {
           onChangeText={() => {}}
           style={styles.input}
         />
-        <Text style={styles.credentials}>PASSWORD</Text>
+        <Text style={styles.credentials}>EMAIL</Text>
         <TextInput 
-          placeholder='Password'
+          placeholder='Email@test.com'
           autCorrect={false}
           onChangeText={() => {}}
           style={styles.input}
         />
+        <Text style={styles.credentials}>PASSWORD</Text>
+        <TextInput 
+          placeholder='********'
+          autCorrect={false}
+          onChangeText={() => {}}
+          style={styles.input}
+        />
+        <View style={styles.userTypes}>
+          <View style={styles.singleUserType}>
+            <CheckBox isChecked={isONGChecked} onClick={handleONGCheck}/>
+            <Text>I'm an "ONG"</Text>
+          </View>
+          <View style={styles.singleUserType}>
+            <CheckBox isChecked={isWasteDisposalChecked} onClick={handleWasteDisposalCheck}/>
+            <Text>I'm a local to E-waste disposal</Text>
+          </View>
+        </View>
         <TouchableOpacity>
-          <Text style={styles.button}>Log in</Text>
+          <Text style={styles.button}>Sign up</Text>
         </TouchableOpacity>
-        <Text style={styles.haveAccount}>Don't have an account?</Text>
+        <Text style={styles.haveAccount}>Already Have Account?</Text>
         <TouchableOpacity>
-          <Text style={styles.signupButton} onPress={() => navigation.navigate('Signup')}>Sign up!</Text>
+          <Text style={styles.signupButton} onPress={() => navigation.navigate('Login')}>Log in!</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -61,6 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 46,
     fontWeight: 'bold',
     marginBottom: 10,
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 11,
@@ -74,6 +110,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 5,
+  },
+  singleUserType: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  userTypes: {
+    alignItems: 'flex-start',
+    marginBottom: 10,
+    marginTop: 10,
   },
   button: {
     fontSize: 16,
