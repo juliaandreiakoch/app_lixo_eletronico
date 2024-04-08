@@ -1,37 +1,37 @@
 import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
-import { Header } from '../components/header';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Header } from '../components/headerAccessPages';
+import { Footer } from '../components/footer'
 
 export function Login({ navigation }) {
   return (
     <KeyboardAvoidingView style={styles.background}>
       <Header/>
       <View style={styles.loginContainer}>
-        <Text style={styles.title}>Login</Text>
-        <Text style={styles.subtitle}>Sign in to continue.</Text>
-        <Text style={styles.credentials}>NAME</Text>
-        <TextInput 
-          placeholder='Name'
-          autCorrect={false}
-          onChangeText={() => {}}
-          style={styles.input}
-        />
-        <Text style={styles.credentials}>PASSWORD</Text>
-        <TextInput 
-          placeholder='Password'
-          autCorrect={false}
-          onChangeText={() => {}}
-          style={styles.input}
-        />
-        <TouchableOpacity>
-          <Text style={styles.button}>Log in</Text>
-        </TouchableOpacity>
-        <Text style={styles.haveAccount}>Don't have an account?</Text>
-        <TouchableOpacity>
-          <Text style={styles.signupButton} onPress={() => navigation.navigate('Signup')}>Sign up!</Text>
-        </TouchableOpacity>
+          <Text style={styles.title}>Entrar</Text>
+          <Text style={styles.subtitle}>Faça Login para continuar.</Text>
+          <Text style={styles.credentials}>NOME</Text>
+          <TextInput 
+            placeholder='Nome'
+            autCorrect={false}
+            onChangeText={() => {}}
+            style={styles.input}
+          />
+          <Text style={styles.credentials}>SENHA</Text>
+          <TextInput 
+            placeholder='********'
+            autCorrect={false}
+            onChangeText={() => {}}
+            style={styles.input}
+          />
+          <TouchableOpacity>
+            <Text style={styles.button}>Entrar</Text>
+          </TouchableOpacity>
+          <Text style={styles.haveAccount}>Não possui uma conta?</Text>
+          <TouchableOpacity>
+            <Text style={styles.signupButton} onPress={() => navigation.navigate('Signup')}>Cadastre-se!</Text>
+          </TouchableOpacity>
       </View>
+      <Footer navigation={navigation}/>
     </KeyboardAvoidingView>
   );
 }
@@ -42,6 +42,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#D4D6C6',
+    paddingTop: 45
+  },
+  loginContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#D4D6C6',
+    width: '80%',
+    height: '75%',
+    marginBottom: 40,
   },
   credentials: {
     fontSize: 11,
@@ -50,21 +59,15 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginLeft: 35,
   },
-  loginContainer: {
-    flex: 1,
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    width: '80%',
-    marginBottom: 300,
-  },
   title: {
     fontSize: 46,
     fontWeight: 'bold',
-    marginBottom: 10,
+    textAlign: 'center',
+    marginBottom: 5,
   },
   subtitle: {
     fontSize: 11,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   input: {
     width: '80%',
@@ -83,7 +86,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     textAlign: 'center',
-    marginBottom: 10,
+    marginTop: 10,
+    marginBottom: 20,
     width: 250,
     borderRadius: 5,
     overflow: 'hidden',

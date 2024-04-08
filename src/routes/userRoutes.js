@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Login } from '../pages/login'
 import { Signup } from '../pages/signup'
+import { Welcome } from '../pages/welcome'
 
 const Stack = createNativeStackNavigator();
 
@@ -10,6 +11,11 @@ export function UserRoutes(){
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen 
+          name='Welcome'
+          component={Welcome}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen 
           name='Login'
           component={Login}

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
-import { Header } from '../components/header';
-
+import { Header } from '../components/headerAccessPages';
 import CheckBox from 'react-native-check-box';
+import { Footer } from '../components/footer';
 
 export function Signup({ navigation }) {
   const [isONGChecked, setIsONGChecked] = React.useState(false);
@@ -26,23 +26,23 @@ export function Signup({ navigation }) {
     <KeyboardAvoidingView style={styles.background}>
       <Header/>
       <View style={styles.loginContainer}>
-        <Text style={styles.title}>Create new Account</Text>
-        <Text style={styles.subtitle}>Already Registered? Log in here.</Text>
-        <Text style={styles.credentials}>NAME</Text>
+        <Text style={styles.title}>Crie uma nova conta</Text>
+        <Text style={styles.subtitle}>Insira seus dados para realizar o cadastro.</Text>
+        <Text style={styles.credentials}>NOME</Text>
         <TextInput 
-          placeholder='Name'
+          placeholder='Nome'
           autCorrect={false}
           onChangeText={() => {}}
           style={styles.input}
         />
         <Text style={styles.credentials}>EMAIL</Text>
         <TextInput 
-          placeholder='Email@test.com'
+          placeholder='Email@seuEmail.com'
           autCorrect={false}
           onChangeText={() => {}}
           style={styles.input}
         />
-        <Text style={styles.credentials}>PASSWORD</Text>
+        <Text style={styles.credentials}>SENHA</Text>
         <TextInput 
           placeholder='********'
           autCorrect={false}
@@ -52,21 +52,22 @@ export function Signup({ navigation }) {
         <View style={styles.userTypes}>
           <View style={styles.singleUserType}>
             <CheckBox isChecked={isONGChecked} onClick={handleONGCheck}/>
-            <Text>I'm an "ONG"</Text>
+            <Text>Sou uma ONG</Text>
           </View>
           <View style={styles.singleUserType}>
             <CheckBox isChecked={isWasteDisposalChecked} onClick={handleWasteDisposalCheck}/>
-            <Text>I'm a local to E-waste disposal</Text>
+            <Text>Sou um local de descarte</Text>
           </View>
         </View>
         <TouchableOpacity>
-          <Text style={styles.button}>Sign up</Text>
+          <Text style={styles.button}>Cadastrar</Text>
         </TouchableOpacity>
-        <Text style={styles.haveAccount}>Already Have Account?</Text>
+        <Text style={styles.haveAccount}>Já possui uma conta?</Text>
         <TouchableOpacity>
-          <Text style={styles.signupButton} onPress={() => navigation.navigate('Login')}>Log in!</Text>
+          <Text style={styles.signupButton} onPress={() => navigation.navigate('Login')}>Acesse aqui!</Text>
         </TouchableOpacity>
       </View>
+      <Footer navigation={navigation}/>
     </KeyboardAvoidingView>
   );
 }
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#D4D6C6',
+    paddingTop: 45,
   },
   credentials: {
     fontSize: 11,
@@ -86,11 +88,10 @@ const styles = StyleSheet.create({
     marginLeft: 35,
   },
   loginContainer: {
-    flex: 1,
     alignItems: 'center', 
     justifyContent: 'center', 
     width: '80%',
-    marginBottom: 300,
+    height: '85%',
   },
   title: {
     fontSize: 46,
