@@ -1,6 +1,6 @@
 import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Header } from '../components/headerAccessPages';
-import { Footer } from '../components/footer'
+import { Footer } from '../components/footerAccessPage'
 
 export function Login({ navigation }) {
   return (
@@ -24,7 +24,7 @@ export function Login({ navigation }) {
             style={styles.input}
           />
           <TouchableOpacity>
-            <Text style={styles.button}>Entrar</Text>
+            <Text style={styles.button} onPress={() => navigation.navigate('Feed')}>Entrar</Text>
           </TouchableOpacity>
           <Text style={styles.haveAccount}>Não possui uma conta?</Text>
           <TouchableOpacity>

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
 import { Header } from '../components/headerAccessPages';
 import CheckBox from 'react-native-check-box';
-import { Footer } from '../components/footer';
+import { Footer } from '../components/footerAccessPage';
 
 export function Signup({ navigation }) {
   const [isONGChecked, setIsONGChecked] = React.useState(false);
