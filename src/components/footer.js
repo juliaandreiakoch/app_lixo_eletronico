@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
+    alignSelf: 'flex-end'
   },
   footerComponent: {
     flex: 1,

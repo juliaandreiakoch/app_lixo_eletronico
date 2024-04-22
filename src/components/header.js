@@ -33,11 +33,12 @@ export function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    height: 50,
+    height: 90,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems:'flex-end',
     backgroundColor: '#939598',
     paddingHorizontal: 10,
+    paddingBottom: 5,
     justifyContent: 'space-between'
   },
   appName: {
