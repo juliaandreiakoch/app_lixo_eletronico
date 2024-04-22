@@ -6,7 +6,7 @@ export function Footer({ navigation }) {
   useEffect(() => {
     async function loadFonts() {
       await Font.loadAsync({
-        'Open Sans': require('../../assets/fonts/OpenSans-Regular.ttf'),
+        'Open Sans': require('../../assets/fonts/OpenSans-Bold.ttf'),
       });
     }
     loadFonts();
@@ -20,7 +20,7 @@ export function Footer({ navigation }) {
             source={require('../assets/homeIcon.png')}
             style={styles.home}
           />
-          <Text style={styles.homeButton}>Início</Text>
+          <Text style={styles.mapButton}>Início</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.footerComponent} onPress={() => navigation.navigate('Feed')}>
@@ -38,7 +38,7 @@ export function Footer({ navigation }) {
 
 const styles = StyleSheet.create({
   footer: {
-    height: 80,
+    height: 60,
     backgroundColor: '#71FE6A',
     flexDirection: 'row',
     alignItems: 'flex-start',
@@ -61,19 +61,19 @@ const styles = StyleSheet.create({
     fontFamily: 'Open Sans',
     marginLeft: 4,
   },
-  mapButton: {
-    fontSize: 20,
+  mapButton: { 
     fontFamily: 'Open Sans',
+    fontSize: 18,
     marginLeft: 4,
   },
   home: {
-    width: 30,
-    height: 30,
-    margin: 5,
+    width: 28,
+    height: 28,
+    margin: 4,
   },
   location: {
-    width: 23,
-    height: 31,
-    margin: 5,
+    width: 20,
+    height: 26,
+    margin: 4,
   },
 });

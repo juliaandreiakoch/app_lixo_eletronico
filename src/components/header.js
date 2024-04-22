@@ -1,6 +1,17 @@
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import * as Font from 'expo-font';
+import React, { useEffect } from 'react';
 
 export function Header() {
+  useEffect(() => {
+    async function loadFonts() {
+      await Font.loadAsync({
+        'Quattrocento': require('../../assets/fonts/Quattrocento-Regular.ttf'),
+      });
+    }
+    loadFonts();
+  }, []);
+
   return (
     <View style={styles.header}>
         <Image 
@@ -22,31 +33,32 @@ export function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    height: 70,
+    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#939598',
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     justifyContent: 'space-between'
   },
   appName: {
-    fontSize: 20,
+    fontFamily: 'Quattrocento',
+    fontSize: 25,
     fontWeight: 'normal',
-    flex: 1
+    flex: 1,
   },
   logo: {
-    width: 50, 
-    height: 50,
+    width: 43, 
+    height: 43,
     borderRadius: 30,
     marginRight: 10
   },
   search: {
-    width: 30, 
-    height: 30,
+    width: 28, 
+    height: 28,
   },
   perfil: {
-    width: 40, 
-    height: 40,
+    width: 38, 
+    height: 38,
     marginLeft: 10
   },   
 });
