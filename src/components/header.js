@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import * as Font from 'expo-font';
 import React, { useEffect } from 'react';
 
-export function Header() {
+export function Header({ navigation }) {
   useEffect(() => {
     async function loadFonts() {
       await Font.loadAsync({
@@ -23,10 +23,14 @@ export function Header() {
             source={require('../assets/searchIcon.png')}
             style={styles.search}
         />
-        <Image 
-            source={require('../assets/perfilIcon.png')}
-            style={styles.perfil}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('User')}>
+          <View >
+            <Image
+              source={require('../assets/perfilIcon.png')}
+              style={styles.perfil}
+            />
+          </View>
+        </TouchableOpacity>
     </View>
   );
 }

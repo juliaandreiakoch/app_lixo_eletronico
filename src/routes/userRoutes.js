@@ -5,6 +5,7 @@ import { Login } from '../pages/login'
 import { Signup } from '../pages/signup'
 import { Welcome } from '../pages/welcome'
 import { Feed } from '../pages/feed'
+import { User } from '../pages/user'
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,11 @@ export function UserRoutes(){
         <Stack.Screen 
           name='Feed'
           component={Feed}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name='User'
+          component={User}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

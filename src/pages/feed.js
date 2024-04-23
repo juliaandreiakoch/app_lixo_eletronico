@@ -5,7 +5,7 @@ import { Footer } from '../components/footer';
 export function Feed({ navigation }) {
     return(
         <View style={styles.container}>
-            <Header style={styles.background}/>
+            <Header style={styles.background} navigation={navigation}/>
             <TouchableOpacity onPress={() => navigation.navigate('Feed')}>
                 <View style={styles.buttonNew}>
                     <Image
@@ -16,7 +16,6 @@ export function Feed({ navigation }) {
                 </View>
             </TouchableOpacity>
             <View style={styles.feed}>
-                <Text>Conteúdo do Feed</Text>
             </View>
             <Footer navigation={navigation}/>
         </View>
