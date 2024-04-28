@@ -4,7 +4,7 @@ export function FeedData({ Post, postList }) {
   return (
     <View id="feed">
       {postList.map((post, index) => (
-        <Post key={index} usuario={post.usuario} imagem={post.imagem} descricao={post.descricao} category={post.category}/>
+        <Post key={index} user={post.user} image={post.image} description={post.description} category={post.category}/>
       ))}
     </View>
   );
