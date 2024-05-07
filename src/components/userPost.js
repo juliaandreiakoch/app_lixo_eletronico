@@ -1,23 +1,23 @@
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 
-export function UserPost({imagem, descricao, category }) {
+export function UserPost({ user, image, secondImage, thirdImage, fourthImage, description, navigation, category }) {
   return (
-    <View style={styles.post}>
-        <TouchableOpacity>
-          <Image source={{ uri: imagem }} style={styles.productImage}/>
-        </TouchableOpacity>
-        <View style={styles.productInfos}>
-      <Text style={styles.category}>{category}</Text>
-      <View style={styles.descriptionAndEditicon}>
-        <Text style={styles.description}>{descricao}</Text>
-        <TouchableOpacity>
-          <Image 
-            source={require('../assets/editIcon.png')}
-            style={styles.perfilIcon}/>
-          </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('Product', { imageUrl: image, secondImage: secondImage, thirdImage: thirdImage, fourthImage: fourthImage, category: category, description: description, user: user })}>
+      <View style={styles.post}>
+          <Image source={{ uri: image }} style={styles.productImage}/>
+          <View style={styles.productInfos}>
+            <Text style={styles.category}>{category}</Text>
+              <View style={styles.descriptionAndEditicon}>
+                <Text style={styles.description}>{description}</Text>
+                <TouchableOpacity>
+                  <Image 
+                    source={require('../assets/editIcon.png')}
+                    style={styles.perfilIcon}/>
+                  </TouchableOpacity>
+              </View>
+          </View>
       </View>
-        </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     backgroundColor: '#74777B',
-    marginBottom: 1,
+    width: 'auto',
+    height: 130,
+    marginBottom: 5,
   },
   productImage: {
     width: 120,
     height: 100,
-    marginLeft: 2
+    marginLeft: 8
   },
   description: {
     fontSize: 12,
@@ -46,11 +48,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
-    marginTop: 10
+    marginTop: 10,
+    paddingRight: 30
   },
   productInfos: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "flex-start",
     alignItems: 'center',
   },
   descriptionAndEditicon: {

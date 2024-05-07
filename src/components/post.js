@@ -1,6 +1,6 @@
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 
-export function Post({ usuario, imagem, descricao }) {
+export function Post({ user, image, secondImage, thirdImage, fourthImage, description, navigation, category }) {
   return (
     <View style={styles.post}>
       <View style={styles.postIdentification}>
@@ -8,12 +8,12 @@ export function Post({ usuario, imagem, descricao }) {
           source={require('../assets/userIconLight.png')}
           style={styles.userIcon}
         />
-        <Text style={styles.userName}> {usuario}</Text>
+        <Text style={styles.userName}> {user}</Text>
       </View>
-        <TouchableOpacity>
-          <Image source={{ uri: imagem }} style={styles.productImage}/>
+        <TouchableOpacity onPress={() => navigation.navigate('Product',  { imageUrl: image, secondImage: secondImage, thirdImage: thirdImage, fourthImage: fourthImage, category: category, description: description, user: user },)}>
+          <Image source={{ uri: image }} style={styles.productImage}/>
         </TouchableOpacity>
-      <Text style={styles.description}>{descricao}</Text>
+      <Text style={styles.description}>{description}</Text>
     </View>
   );
 }
