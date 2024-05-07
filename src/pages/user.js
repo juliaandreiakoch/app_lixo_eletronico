@@ -1,4 +1,4 @@
-import { StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, Text, Image, ScrollView} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Image, ScrollView} from 'react-native';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import React, { useEffect } from 'react';
@@ -18,8 +18,7 @@ export function User({ navigation }) {
     }, []);
 
     const handleUserPosts = (userName, postList) => { 
-        const userPosts = postList.filter(post => post.usuario === userName);
-        console.log(userPosts);
+        const userPosts = postList.filter(post => post.user === userName);
         return userPosts;
     }
 
@@ -27,7 +26,7 @@ export function User({ navigation }) {
 
     return(
         <View style={styles.container}>
-            <Header style={styles.background}/>
+            <Header style={styles.background} navigation={navigation}/>
             <View style={styles.perfil}>
                 <View style={styles.identification}>
                     <Image
@@ -45,12 +44,16 @@ export function User({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity style={styles.chatButton}>
                 <Text style={styles.messages} onPress={() => navigation.navigate('User')}>Ver Mensagens</Text>
+                <Image
+                    source={require('../assets/chatIcon.png')}
+                    style={styles.chatIcon}
+                  />
             </TouchableOpacity>
             <View style={styles.posts}>
                 <ScrollView>
-                    <FeedData Post={UserPost} postList={handleUserPosts(name, postList)}/> 
+                    <FeedData Post={UserPost} postList={handleUserPosts(name, postList)} navigation={navigation}/> 
                 </ScrollView>
             </View>
             <Footer navigation={navigation}/>
@@ -66,21 +69,19 @@ const styles = StyleSheet.create({
     },
     background: {
         flex: 1,
-        backgroundColor: '#939598',
         marginTop: 100,
     },
     posts: {
         flex: 1,
         marginLeft: 15,
         marginRight: 15,
-        height: 'auto'
+        height: 'auto',
     },
     perfil: {
         height: 150,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems:'center',
-        backgroundColor: '#D0D1D4',
         marginLeft: 20,
         marginRight: 20
     },
@@ -111,13 +112,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#71FE6A',
         color: 'black',
         fontWeight: 'bold',
-        paddingVertical: 5,
-        textAlign: 'center',
-        borderRadius: 12,
-        overflow: 'hidden',
-        width: 150,
-        marginLeft: 20,
-        marginBottom: 10
     },
     buttons: {
         flexDirection: 'column',
@@ -126,5 +120,23 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start'
+    },
+    chatIcon: {
+        width: 20, 
+        height: 20,
+        marginLeft: 5
+    },
+    chatButton: {
+        flexDirection: 'row',
+        backgroundColor: '#71FE6A',
+        marginTop: 10,
+        borderRadius: 12,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        marginBottom: 15,
+        marginLeft: 10,
+        width: 150,
     },
 });

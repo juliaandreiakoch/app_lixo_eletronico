@@ -7,26 +7,22 @@ import { Post } from '../components/post';
 
 export function Feed({ navigation }) {
     return(
-        <ScrollView>
-            <View style={styles.container}>
-                <Header style={styles.background} navigation={navigation}/>
-                    <View style={styles.buttonNew}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Feed')}>
-                            <Image
-                                source={require('../assets/addLight.png')}
-                                style={styles.add}
-                            />
-                        </TouchableOpacity>
-                        <Text style={styles.postButton}>Divulgar</Text>
-                    </View>
-
-                <FeedData Post={Post} postList={postList}/>
-
-                <View style={styles.feed}>
-                </View>
-                <Footer navigation={navigation}/>
+        <View style={styles.container}>
+            <Header style={styles.background} navigation={navigation}/>
+            <View style={styles.buttonNew}>
+                <TouchableOpacity onPress={() => navigation.navigate('Feed')}>
+                    <Image
+                        source={require('../assets/addLight.png')}
+                        style={styles.add}
+                    />
+                </TouchableOpacity>
+                <Text style={styles.postButton}>Divulgar</Text>
             </View>
-        </ScrollView>
+            <ScrollView>
+                <FeedData Post={Post} postList={postList} navigation={navigation}/>
+            </ScrollView>
+            <Footer navigation={navigation}/>
+        </View>
     );
 }
 
