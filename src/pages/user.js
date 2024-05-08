@@ -40,7 +40,7 @@ export function User({ navigation }) {
                         <Text style={styles.optionButton} onPress={() => navigation.navigate('User')}>Editar Perfil</Text>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Text style={styles.optionButton} onPress={() => navigation.navigate('Login')}>Sair da conta</Text>
+                        <Text style={styles.optionButton} onPress={() => navigation.navigate('Welcome')}>Sair da conta</Text>
                     </TouchableOpacity>
                 </View>
             </View>
