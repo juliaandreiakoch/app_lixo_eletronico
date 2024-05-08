@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#D4D6C6',
+    backgroundColor: '#D0D1D4',
     paddingTop: 45
   },
   loginContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#D4D6C6',
+    backgroundColor: '#D0D1D4',
     width: '80%',
     height: '75%',
     marginBottom: 40,
