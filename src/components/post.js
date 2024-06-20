@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   userName: {
-    fontSize: '15px',
+    fontSize: 15,
     color: 'white',
   },
   description: {

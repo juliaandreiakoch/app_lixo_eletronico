@@ -3,10 +3,27 @@ import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Te
 import { Header } from '../components/headerAccessPages';
 import CheckBox from 'react-native-check-box';
 import { Footer } from '../components/footerAccessPage';
+import { auth } from '../services/firebaseConnection'; 
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-export function Signup({ navigation }) {
+export function Signup({ navigation, route }) {
+  const { changeStatus } = route.params;
   const [isONGChecked, setIsONGChecked] = React.useState(false);
   const [isWasteDisposalChecked, setIsWasteDisposalChecked] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  function createUser(){
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      changeStatus(user);
+    })
+    .catch((err) => {
+      console.log(err);
+      alert('deu erro');
+    });
+  }
 
   const handleONGCheck = () => {
     setIsONGChecked(!isONGChecked);
@@ -24,29 +41,24 @@ export function Signup({ navigation }) {
 
   return (
     <KeyboardAvoidingView style={styles.background}>
-      <Header/>
+      <Header />
       <View style={styles.loginContainer}>
         <Text style={styles.title}>Crie uma nova conta</Text>
         <Text style={styles.subtitle}>Insira seus dados para realizar o cadastro.</Text>
-        <Text style={styles.credentials}>NOME</Text>
-        <TextInput 
-          placeholder='Nome'
-          autCorrect={false}
-          onChangeText={() => {}}
-          style={styles.input}
-        />
         <Text style={styles.credentials}>EMAIL</Text>
         <TextInput 
+          style={styles.input}
           placeholder='Email@seuEmail.com'
           autCorrect={false}
-          onChangeText={() => {}}
-          style={styles.input}
+          value={email}
+          onChangeText={ (text) => setEmail(text) }    
         />
         <Text style={styles.credentials}>SENHA</Text>
         <TextInput 
           placeholder='********'
           autCorrect={false}
-          onChangeText={() => {}}
+          value={password}
+          onChangeText={ (text) => setPassword(text) }
           style={styles.input}
         />
         <View style={styles.userTypes}>
@@ -60,7 +72,7 @@ export function Signup({ navigation }) {
           </View>
         </View>
         <TouchableOpacity>
-          <Text style={styles.button}>Cadastrar</Text>
+          <Text style={styles.button} onPress={createUser}>Cadastrar</Text>
         </TouchableOpacity>
         <Text style={styles.haveAccount}>Já possui uma conta?</Text>
         <TouchableOpacity>

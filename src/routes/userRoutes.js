@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useState } from 'react';
 
 import { Login } from '../pages/login'
 import { Signup } from '../pages/signup'
@@ -11,24 +12,42 @@ import { Product } from '../pages/product';
 const Stack = createNativeStackNavigator();
 
 export function UserRoutes(){
+  const [user, setUser] = useState(null);
+
+  const changeStatus = (newUser) => {
+    setUser(newUser);
+  }
+
+  if(!user){
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+              name='Welcome'
+              component={Welcome}
+              options={{ headerShown: false }}
+              initialParams={{ changeStatus }}
+            />
+            <Stack.Screen 
+              name='Login'
+              component={Login}
+              options={{ headerShown: false }}
+              initialParams={{ changeStatus }}
+            />
+            <Stack.Screen 
+              name='Signup'
+              component={Signup}
+              options={{ headerShown: false }}
+              initialParams={{ changeStatus }}
+            />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen 
-          name='Welcome'
-          component={Welcome}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen 
-          name='Login'
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen 
-          name='Signup'
-          component={Signup}
-          options={{ headerShown: false }}
-        />
         <Stack.Screen 
           name='Feed'
           component={Feed}
@@ -38,6 +57,7 @@ export function UserRoutes(){
           name='User'
           component={User}
           options={{ headerShown: false }}
+          initialParams={{ user, changeStatus}}
         />
         <Stack.Screen 
           name='Product'

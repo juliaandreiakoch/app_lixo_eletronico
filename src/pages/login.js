@@ -1,30 +1,53 @@
-import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Text } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
 import { Header } from '../components/headerAccessPages';
-import { Footer } from '../components/footerAccessPage'
+import { Footer } from '../components/footerAccessPage';
+import { auth } from '../services/firebaseConnection'; 
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
-export function Login({ navigation }) {
+export function Login({ navigation, route }) {
+  const { changeStatus } = route.params;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        changeStatus(user);
+      })
+      .catch((error) => {
+        Alert.alert('Erro de login', 'Email ou senha inválidos.');
+        console.error(error);
+      });
+  };
+
   return (
     <KeyboardAvoidingView style={styles.background}>
       <Header/>
       <View style={styles.loginContainer}>
           <Text style={styles.title}>Entrar</Text>
           <Text style={styles.subtitle}>Faça Login para continuar.</Text>
-          <Text style={styles.credentials}>NOME</Text>
+          <Text style={styles.credentials}>EMAIL</Text>
           <TextInput 
-            placeholder='Nome'
-            autCorrect={false}
-            onChangeText={() => {}}
+            placeholder='Email'
+            autoCorrect={false}
+            onChangeText={setEmail}
+            value={email}
             style={styles.input}
+            keyboardType='email-address'
           />
           <Text style={styles.credentials}>SENHA</Text>
           <TextInput 
             placeholder='********'
-            autCorrect={false}
-            onChangeText={() => {}}
+            autoCorrect={false}
+            secureTextEntry={true}
+            onChangeText={setPassword}
+            value={password}
             style={styles.input}
           />
           <TouchableOpacity>
-            <Text style={styles.button} onPress={() => navigation.navigate('Feed')}>Entrar</Text>
+            <Text style={styles.button} onPress={handleLogin}>Entrar</Text>
           </TouchableOpacity>
           <Text style={styles.haveAccount}>Não possui uma conta?</Text>
           <TouchableOpacity>
@@ -42,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#D0D1D4',
-    paddingTop: 45
+    paddingTop: 45,
   },
   loginContainer: {
     alignItems: 'center',
