@@ -7,7 +7,8 @@ export function Product({ route, navigation }) {
   const { category, imageUrl, secondImage, thirdImage, fourthImage, description, user } = route.params;
 
     return(
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.productContainer}>
            <Header navigation={navigation}/>
             <ScrollView>
               <View style={styles.productInfos}>
@@ -34,8 +35,9 @@ export function Product({ route, navigation }) {
                   </View>
               </View>
             </ScrollView>
-            <Footer navigation={navigation} />            
         </View>
+            <Footer navigation={navigation} />            
+      </View>
     );
 }
 
@@ -43,6 +45,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#1C2120',
+    },
+    productContainer: {
+      height: '90%',
     },
     image: {
       width: 300,
@@ -58,7 +63,6 @@ const styles = StyleSheet.create({
       marginLeft: 15,
     },
     productInfos: {
-      flex: 1,
       justifyContent: 'flex-start',
       alignItems: 'center',
       marginTop: 25,
@@ -86,7 +90,8 @@ const styles = StyleSheet.create({
       fontSize: 12,
       fontWeight: 'bold',
       color: 'white',
-      marginLeft: 40
+      marginLeft: 40,
+      marginBottom: 10,
     },
     chatButtonText: {
       fontSize: 11,

@@ -7,7 +7,8 @@ import { Signup } from '../pages/signup'
 import { Welcome } from '../pages/welcome'
 import { Feed } from '../pages/feed'
 import { User } from '../pages/user'
-import { Product } from '../pages/product';
+import { Product } from '../pages/product'
+import { Disposal } from '../pages/disposal';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,11 @@ export function UserRoutes(){
         <Stack.Screen 
           name='Feed'
           component={Feed}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name='Disposal'
+          component={Disposal}
           options={{ headerShown: false }}
         />
         <Stack.Screen 
