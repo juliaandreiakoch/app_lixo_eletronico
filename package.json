@@ -13,6 +13,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "expo": "^51.0.12",
     "expo-font": "~11.10.3",
+    "expo-image-picker": "^15.0.6",
     "expo-status-bar": "~1.11.1",
     "firebase": "^10.12.2",
     "react": "18.2.0",

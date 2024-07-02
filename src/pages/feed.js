@@ -10,7 +10,7 @@ export function Feed({ navigation }) {
         <View style={styles.container}>
             <Header style={styles.background} navigation={navigation}/>
             <View style={styles.buttonNew}>
-                <TouchableOpacity onPress={() => navigation.navigate('Feed')}>
+                <TouchableOpacity onPress={() => navigation.navigate('CreatePost')}>
                     <Image
                         source={require('../assets/addLight.png')}
                         style={styles.add}

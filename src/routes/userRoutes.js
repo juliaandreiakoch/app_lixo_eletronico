@@ -8,6 +8,7 @@ import { Welcome } from '../pages/welcome'
 import { Feed } from '../pages/feed'
 import { User } from '../pages/user'
 import { Product } from '../pages/product';
+import { CreatePost } from '../pages/createPost';
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +64,12 @@ export function UserRoutes(){
           name='Product'
           component={Product}
           options={{ headerShown: false }}
+        />
+         <Stack.Screen 
+          name='CreatePost'
+          component={CreatePost}
+          options={{ headerShown: false }}
+          initialParams={{ user, changeStatus}}
         />
       </Stack.Navigator>
     </NavigationContainer>
