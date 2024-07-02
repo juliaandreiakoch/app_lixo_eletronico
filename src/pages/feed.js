@@ -18,9 +18,6 @@ export function Feed({ navigation }) {
                 </TouchableOpacity>
                 <Text style={styles.postButton}>Divulgar</Text>
             </View>
-            <ScrollView>
-                <FeedData Post={Post} postList={postList} navigation={navigation}/>
-            </ScrollView>
             <Footer navigation={navigation}/>
         </View>
     );
@@ -31,13 +28,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#1C2120',
     },
-    background: {
-        flex: 1,
-        backgroundColor: '#939598',
-        marginTop: 100
+    postContainer: {
+        height: '75%',
     },
     feed: {
-        flex: 1,
         backgroundColor: '#D0D1D4',
     },
     buttonNew: {

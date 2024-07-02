@@ -36,35 +36,37 @@ export function User({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <Header style={styles.background} navigation={navigation} />
-            <View style={styles.perfil}>
-                <View style={styles.identification}>
+            <View>
+                <Header navigation={navigation} />
+                <View style={styles.perfil}>
+                    <View style={styles.identification}>
+                        <Image
+                            source={require('../assets/perfilIcon.png')}
+                            style={styles.perfilIcon}
+                        />
+                        <Text style={styles.name}>{email}</Text>
+                    </View>
+                    <View style={styles.buttons}>
+                        <TouchableOpacity>
+                            <Text style={styles.optionButton} onPress={() => navigation.navigate('User')}>Editar Perfil</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleSignOut}>
+                            <Text style={styles.optionButton}>Sair da conta</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <TouchableOpacity style={styles.chatButton}>
+                    <Text style={styles.messages} onPress={() => navigation.navigate('User')}>Ver Mensagens</Text>
                     <Image
-                        source={require('../assets/perfilIcon.png')}
-                        style={styles.perfilIcon}
+                        source={require('../assets/chatIcon.png')}
+                        style={styles.chatIcon}
                     />
-                    <Text style={styles.name}>{email}</Text>
+                </TouchableOpacity>
+                <View style={styles.posts}>
+                    <ScrollView>
+                        <FeedData Post={UserPost} postList={postList} navigation={navigation} />
+                    </ScrollView>
                 </View>
-                <View style={styles.buttons}>
-                    <TouchableOpacity>
-                        <Text style={styles.optionButton} onPress={() => navigation.navigate('User')}>Editar Perfil</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handleSignOut}>
-                        <Text style={styles.optionButton}>Sair da conta</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <TouchableOpacity style={styles.chatButton}>
-                <Text style={styles.messages} onPress={() => navigation.navigate('User')}>Ver Mensagens</Text>
-                <Image
-                    source={require('../assets/chatIcon.png')}
-                    style={styles.chatIcon}
-                />
-            </TouchableOpacity>
-            <View style={styles.posts}>
-                <ScrollView>
-                    <FeedData Post={UserPost} postList={postList} navigation={navigation} />
-                </ScrollView>
             </View>
             <Footer navigation={navigation} />
         </View>
@@ -76,15 +78,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#D0D1D4',
     },
-    background: {
-        flex: 1,
-        marginTop: 100,
-    },
     posts: {
-        flex: 1,
+        height: '60%',
         marginLeft: 15,
         marginRight: 15,
-        height: 'auto',
     },
     perfil: {
         height: 150,

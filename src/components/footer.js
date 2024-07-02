@@ -12,8 +12,13 @@ export function Footer({ navigation }) {
     loadFonts();
   }, []);
 
+  const currentRoute = navigation.getState().routes[navigation.getState().index].name;
+  const isNotDisposalScreen = currentRoute != 'Disposal';
+  const isNotFeedScreen = currentRoute != 'Feed'
+
   return (
     <View style={styles.footer}>
+       {isNotFeedScreen && 
       <TouchableOpacity style={styles.footerComponent} onPress={() => navigation.navigate('Feed')}>
         <View style={styles.buttonContent}>
           <Image
@@ -23,27 +28,35 @@ export function Footer({ navigation }) {
           <Text style={styles.mapButton}>Início</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.footerComponent} onPress={() => navigation.navigate('Feed')}>
-        <View style={styles.buttonContent}>
-          <Image
-            source={require('../assets/locationIcon.png')}
-            style={styles.location}
-          />
-          <Text style={styles.mapButton}>Descarte</Text>
-        </View>
-      </TouchableOpacity>
+      }
+      {isNotDisposalScreen && 
+
+        <TouchableOpacity style={styles.footerComponent} onPress={() => navigation.navigate('Disposal')}>
+          <View style={styles.buttonContent}>
+            <Image
+              source={require('../assets/locationIcon.png')}
+              style={styles.location}
+            />
+            <Text style={styles.mapButton}>Descarte</Text>
+          </View>
+        </TouchableOpacity>
+
+      }
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     height: 60,
-    backgroundColor: '#71FE6A',
     flexDirection: 'row',
+    backgroundColor: '#71FE6A',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    alignSelf: 'flex-end'
   },
   footerComponent: {
     flex: 1,
