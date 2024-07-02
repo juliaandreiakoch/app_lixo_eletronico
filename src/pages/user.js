@@ -1,27 +1,49 @@
-import { StyleSheet, View, TouchableOpacity, Text, Image, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
-import React, { useEffect } from 'react';
-import * as Font from 'expo-font';
-import { FeedData } from '../components/feedData';
-import { postList } from '../mocks/postList';
+import { database } from '../services/firebaseConnection';
+import { ref as databaseRef, get } from 'firebase/database';
 import { UserPost } from '../components/userPost';
 import { signOut } from 'firebase/auth';
 import { auth } from '../services/firebaseConnection';
 
 export function User({ navigation, route }) {
     const { user, changeStatus } = route.params;
+    const userId = user.uid; // ID do usuário logado
+
+    const [userPosts, setUserPosts] = useState([]);
 
     useEffect(() => {
-        async function loadFonts() {
-            await Font.loadAsync({
-                'Open Sans': require('../../assets/fonts/OpenSans-Bold.ttf'),
-            });
-        }
-        loadFonts();
-    }, []);
+        const loadPosts = async () => {
+            const postsRef = databaseRef(database, `products/${userId}`);
 
-    const email = user.email;
+            try {
+                const snapshot = await get(postsRef);
+                if (snapshot.exists()) {
+                    const postData = snapshot.val();
+                    console.log('Posts carregados:', postData); 
+                    const postsArray = [];
+
+                    Object.keys(postData).forEach(postId => {
+                        postsArray.push({
+                            id: postId,
+                            user: userId,
+                            ...postData[postId]
+                        });
+                    });
+
+                    setUserPosts(postsArray);
+                } else {
+                    console.log('Nenhum dado disponível');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar posts:', error);
+            }
+        };
+
+        loadPosts();
+    }, [userId]); 
 
     const handleSignOut = () => {
         signOut(auth)
@@ -36,37 +58,44 @@ export function User({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <View>
-                <Header navigation={navigation} />
-                <View style={styles.perfil}>
-                    <View style={styles.identification}>
-                        <Image
-                            source={require('../assets/perfilIcon.png')}
-                            style={styles.perfilIcon}
-                        />
-                        <Text style={styles.name}>{email}</Text>
-                    </View>
-                    <View style={styles.buttons}>
-                        <TouchableOpacity>
-                            <Text style={styles.optionButton} onPress={() => navigation.navigate('User')}>Editar Perfil</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={handleSignOut}>
-                            <Text style={styles.optionButton}>Sair da conta</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <TouchableOpacity style={styles.chatButton}>
-                    <Text style={styles.messages} onPress={() => navigation.navigate('User')}>Ver Mensagens</Text>
+            <Header navigation={navigation} />
+            <View style={styles.perfil}>
+                <View style={styles.identification}>
                     <Image
-                        source={require('../assets/chatIcon.png')}
-                        style={styles.chatIcon}
+                        source={require('../assets/perfilIcon.png')}
+                        style={styles.perfilIcon}
                     />
-                </TouchableOpacity>
-                <View style={styles.posts}>
-                    <ScrollView>
-                        <FeedData Post={UserPost} postList={postList} navigation={navigation} />
-                    </ScrollView>
+                    <Text style={styles.name}>{user.email}</Text>
                 </View>
+                <View style={styles.buttons}>
+                    <TouchableOpacity>
+                        <Text style={styles.optionButton}>Editar Perfil</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleSignOut}>
+                        <Text style={styles.optionButton}>Sair da conta</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <TouchableOpacity style={styles.chatButton}>
+                <Text style={styles.messages}>Ver Mensagens</Text>
+                <Image
+                    source={require('../assets/chatIcon.png')}
+                    style={styles.chatIcon}
+                />
+            </TouchableOpacity>
+            <View style={styles.posts}>
+                <ScrollView>
+                    {userPosts.map((post, index) => (
+                        <UserPost
+                            key={index}
+                            user={post.user}
+                            image={post.image}
+                            description={post.description}
+                            category={post.category}
+                            navigation={navigation}
+                        />
+                    ))}
+                </ScrollView>
             </View>
             <Footer navigation={navigation} />
         </View>
@@ -108,7 +137,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     name: {
-        fontFamily: 'Open Sans',
         fontSize: 16,
         marginLeft: 10,
     },
@@ -146,3 +174,5 @@ const styles = StyleSheet.create({
         width: 150,
     },
 });
+
+export default User
