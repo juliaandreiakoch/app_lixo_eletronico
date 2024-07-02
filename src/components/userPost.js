@@ -11,8 +11,7 @@ export function UserPost({ user, image, secondImage, thirdImage, fourthImage, de
                 <Text style={styles.description}>{description}</Text>
                 <TouchableOpacity>
                   <Image 
-                    source={require('../assets/editIcon.png')}
-                    style={styles.perfilIcon}/>
+                    source={require('../assets/editIcon.png')}/>
                   </TouchableOpacity>
               </View>
           </View>
@@ -57,9 +56,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   descriptionAndEditicon: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    width: '95%',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingRight: 10
+    flexDirection: 'row',
   }
 });
